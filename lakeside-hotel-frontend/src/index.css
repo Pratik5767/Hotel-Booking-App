@@ -89,6 +89,8 @@ body {
     height: '100vh'
 }
 
+
+
 .parallax {
     background-image: url("./assets/images/parrall.jpg");
     background-attachment: fixed;
