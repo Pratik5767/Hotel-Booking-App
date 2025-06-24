@@ -5,16 +5,15 @@ import com.project.lakeside_hotel_backend.response.RoomResponse;
 import com.project.lakeside_hotel_backend.service.room.IRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.List;
 
+@CrossOrigin("http://localhost:5173")
 @RestController
 @RequestMapping("/rooms")
 @RequiredArgsConstructor
@@ -31,4 +30,8 @@ public class RoomController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/room/types")
+    public List<String> getRoomTypes() {
+        return roomService.getAllRoomTypes();
+    }
 }
