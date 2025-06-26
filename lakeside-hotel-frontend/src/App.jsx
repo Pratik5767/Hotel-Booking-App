@@ -5,14 +5,16 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Home from './components/home/Home.jsx'
 import EditRoom from './components/room/EditRoom.jsx'
+import AddRoom from './components/room/AddRoom.jsx'
 
 const App = () => {
     return (
         <>
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/edit-room/:id' element={<EditRoom />} />
+                <Route path='/edit-room/:roomId' element={<EditRoom />} />
                 <Route path='/existing-rooms' element={<ExistingRooms />} />
+                <Route path='/add-room' element={<AddRoom />} />
             </Routes>
         </>
     )
