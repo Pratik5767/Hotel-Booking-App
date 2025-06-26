@@ -63,7 +63,7 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
                                         onChange={handleNewRoomTypeInputChange}
                                     />
 
-                                    <button className="btn btn-danger" onClick={handleAddNewRoomType}>
+                                    <button className="btn btn-hotel" onClick={handleAddNewRoomType}>
                                         Add
                                     </button>
                                 </div>
