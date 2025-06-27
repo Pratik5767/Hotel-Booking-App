@@ -2,7 +2,7 @@ import { Card, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 const RoomCard = ({ room }) => {
-    
+
     return (
         <Col key={room.id} className="mb-4" xs={12}>
             <Card>
@@ -12,13 +12,13 @@ const RoomCard = ({ room }) => {
                             variant="top"
                             src={`data:image/png;base64, ${room.photo}`}
                             alt="Room Photo"
-                            style={{width: "100%", maxWidth: "200px", height: "auto"}}
+                            style={{ width: "100%", maxWidth: "200px", height: "auto" }}
                         />
                     </div>
 
                     <div className="flex-grow-1 ml-3 px-5">
                         <Card.Title className="hotel-color">{room.roomType}</Card.Title>
-                        <Card.Title className="room-price">{room.roomPrice}</Card.Title>
+                        <Card.Title className="room-price">{room.roomPrice}/night</Card.Title>
                         <Card.Text>Some room information goes there for the guest to read through</Card.Text>
                     </div>
 

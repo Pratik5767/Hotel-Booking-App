@@ -9,7 +9,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary px-5 shadow sticky-top"> {/*mt-5 */}
+        <nav className="navbar navbar-expand-lg bg-body-tertiary px-5 shadow sticky-top mt-5">
             <div className="container-fluid">
                 <Link to={"/"} className="navbar-brand">
                     <span className="hotel-color">lakeSide Hotel</span>
