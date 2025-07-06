@@ -7,7 +7,7 @@ export const api = axios.create({
 // This functions adds a new room to the database
 export async function addRoom(photo, roomType, roomPrice) {
     const formData = new FormData();
-    
+
     formData.append("photo", photo)
     formData.append("roomType", roomType)
     formData.append("roomPrice", roomPrice)
@@ -67,5 +67,53 @@ export async function getRoomById(roomId) {
         return response.data;
     } catch (error) {
         throw new Error(`Error fetching room ${error.message}`);
+    }
+}
+
+// This function saves the new booking
+export async function bookRoom(roomId, booking) {
+    try {
+        const response = await api.post(`/bookings/room/${roomId}/booking`, booking);
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data);
+        } else {
+            throw new Error(`Error booking room: ${error.message}`);
+        }
+    }
+}
+
+// This function gets all the bookings
+export async function getAllBookings() {
+    try {
+        const response = await api.get(`/bookings/all-bookings`);
+        return response.data;
+    } catch (error) {
+        throw new Error(`Error fetching bookings: ${error.message}`)
+    }
+}
+
+// This function gets the booking by the confirmation code
+export async function getBookingByConfirmationCode(confirmationCode) {
+    try {
+        const response = await api.get(`/bookings/confirmation/${confirmationCode}`);
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data);
+        } else {
+            throw new Error(`Error booking room ${error.message}`);
+        }
+    }
+}
+
+// This function cancel the booking
+export async function cancelBooking(bookingId) {
+    try {
+        const response = await api.delete(`/bookings/booking/${bookingId}/delete`);
+        return response.data;
+    } catch (error) {
+        throw new Error(`Error canceling booking: ${error.message}`);
     }
 }
