@@ -92,12 +92,12 @@ body {
 
 
 .parallax {
-    background-image: url("./assets/images/parrall.jpg");
+    background-image: url("./assets/images/parrall.jpeg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 50vh;
+    height: 75vh;
 }
 
 .header {
