@@ -73,8 +73,8 @@ export async function getRoomById(roomId) {
 // This function saves the new booking
 export async function bookRoom(roomId, booking) {
     try {
-        const response = await api.post(`/bookings/room/${roomId}/booking`, booking);
-        return response.data;
+        const result = await api.post(`/bookings/room/${roomId}/booking`, booking);
+        return result.data;
     } catch (error) {
         if (error.response && error.response.data) {
             throw new Error(error.response.data);
@@ -97,8 +97,8 @@ export async function getAllBookings() {
 // This function gets the booking by the confirmation code
 export async function getBookingByConfirmationCode(confirmationCode) {
     try {
-        const response = await api.get(`/bookings/confirmation/${confirmationCode}`);
-        return response.data;
+        const result = await api.get(`/bookings/confirmation/${confirmationCode}`);
+        return result.data;
     } catch (error) {
         if (error.response && error.response.data) {
             throw new Error(error.response.data);
@@ -116,4 +116,11 @@ export async function cancelBooking(bookingId) {
     } catch (error) {
         throw new Error(`Error canceling booking: ${error.message}`);
     }
+}
+
+// This function get all the avaiable room from the database within a given date and room type
+export async function getAvailableRooms(checkInDate, checkOutDate, roomType) {
+    const response = await api.get(
+        `/rooms/available-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`);
+    return response;
 }

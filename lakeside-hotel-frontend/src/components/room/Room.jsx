@@ -26,7 +26,12 @@ const Room = () => {
     }, [])
 
     if (loading) {
-        return <div>Loading rooms...</div>
+        return (
+            <div className="d-flex align-items-center justify-content-center my-4">
+                <div className="spinner-border text-primary me-3" role="status" aria-hidden="true"></div>
+                <strong>Loading rooms...</strong>
+            </div>
+        )
     } if (error) {
         return <div className="text-danger">Error: {error}</div>
     }

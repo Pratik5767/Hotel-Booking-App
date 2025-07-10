@@ -36,7 +36,10 @@ const CheckOut = () => {
                     <div className="col-md-4 mt-5 mb-5">
                         {
                             loading ? (
-                                <p>Loading rooms information...</p>
+                                <div className="d-flex align-items-center justify-content-center my-4">
+                                    <div className="spinner-border text-primary me-3" role="status" aria-hidden="true"></div>
+                                    <strong>Loading rooms information...</strong>
+                                </div>
                             ) : error ? (
                                 <p>{error}</p>
                             ) : (
@@ -87,7 +90,7 @@ const CheckOut = () => {
             </section>
 
             <div className="container">
-                <RoomCarousel/>
+                <RoomCarousel />
             </div>
 
         </div>

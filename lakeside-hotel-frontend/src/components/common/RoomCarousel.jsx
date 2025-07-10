@@ -20,7 +20,12 @@ const RoomCarousel = () => {
     }, [])
 
     if (loading) {
-        return <div className="mt-5">Loading rooms...</div>
+        return (
+            <div className="d-flex align-items-center justify-content-center my-4">
+                <div className="spinner-border text-primary me-3" role="status" aria-hidden="true"></div>
+                <strong className="mt-5">Loading rooms...</strong>
+            </div>
+        )
     }
 
     if (errorMsg) {

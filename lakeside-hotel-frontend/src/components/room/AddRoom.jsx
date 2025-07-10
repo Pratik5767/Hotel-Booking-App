@@ -76,6 +76,7 @@ const AddRoom = () => {
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label htmlFor="roomType" className="form-label">Room Type</label>
+                                
                                 <div>
                                     <RoomTypeSelector
                                         handleRoomInputChange={handleRoomInputChange}
@@ -100,6 +101,7 @@ const AddRoom = () => {
 
                             <div className="mb-3">
                                 <label htmlFor="photo" className="form-label">Room Photo</label>
+                                
                                 <input
                                     type="file"
                                     id="photo"
@@ -107,6 +109,7 @@ const AddRoom = () => {
                                     onChange={handleImageChange}
                                     className="form-control"
                                 />
+                                
                                 {
                                     imagePreview && (
                                         <img
@@ -122,6 +125,7 @@ const AddRoom = () => {
                                 <Link to={"/existing-rooms"} className="btn btn-outline-info">
                                     Existing Room
                                 </Link>
+                                
                                 <div className="d-grid d-md-flex">
                                     <button className="btn btn-outline-primary ml-5">Save Room</button>
                                 </div>

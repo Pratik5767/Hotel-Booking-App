@@ -90,7 +90,10 @@ const ExistingRooms = () => {
 
             {
                 loading ? (
-                    <p>Loading existing rooms</p>
+                    <div className="d-flex align-items-center justify-content-center my-4">
+                        <div className="spinner-border text-primary me-3" role="status" aria-hidden="true"></div>
+                        <strong>Loading existing rooms</strong>
+                    </div>
                 ) : (
                     <section className="mt-5 mb-5 container">
                         <div className="d-flex justify-content-between mb-3 mt-5">
