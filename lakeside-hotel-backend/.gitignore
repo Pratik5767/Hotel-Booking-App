@@ -15,11 +15,12 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
+.mvn
 *.iws
 *.iml
 *.ipr
 # Ignore application.properties
-src/main/resources/application.yml
+src/main/resources/application.properties
 
 ### NetBeans ###
 /nbproject/private/
