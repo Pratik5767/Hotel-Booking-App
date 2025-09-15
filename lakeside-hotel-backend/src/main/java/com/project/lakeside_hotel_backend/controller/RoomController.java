@@ -4,7 +4,6 @@ import com.project.lakeside_hotel_backend.exception.PhotoRetrievalException;
 import com.project.lakeside_hotel_backend.exception.ResourceNotFoundException;
 import com.project.lakeside_hotel_backend.model.BookedRoom;
 import com.project.lakeside_hotel_backend.model.Room;
-import com.project.lakeside_hotel_backend.response.BookingResponse;
 import com.project.lakeside_hotel_backend.response.RoomResponse;
 import com.project.lakeside_hotel_backend.service.bookedRoom.IBookingService;
 import com.project.lakeside_hotel_backend.service.room.IRoomService;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin("http://localhost:5173")
 @RestController
 @RequestMapping("/rooms")
 @RequiredArgsConstructor

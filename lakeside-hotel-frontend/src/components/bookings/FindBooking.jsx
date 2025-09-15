@@ -24,7 +24,6 @@ const FindBooking = () => {
         totalNumOfGuest: ""
     });
     const [isDeleted, setIsDeleted] = useState(false);
-
     const clearBookingInfo = {
         id: "",
         room: {
