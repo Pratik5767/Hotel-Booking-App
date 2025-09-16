@@ -14,7 +14,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.FOUND;
 
 @RestController
-@RequestMapping("/api/roles")
+@RequestMapping("/roles")
 @RequiredArgsConstructor
 public class RoleController {
 
@@ -50,7 +50,7 @@ public class RoleController {
         return roleService.removeUserFromRole(userId, roleId);
     }
 
-    @PostMapping("/assign-role-to-user/")
+    @PostMapping("/assign-role-to-user")
     public User assignRoleToUser(@RequestParam Long userId, @RequestParam Long roleId) {
         return roleService.assignRoleToUser(userId, roleId);
     }
