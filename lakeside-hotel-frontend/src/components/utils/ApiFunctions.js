@@ -4,6 +4,14 @@ export const api = axios.create({
     baseURL: "http://localhost:9000"
 })
 
+export const getHeader = () => {
+    const token = localStorage.getItem("token");
+    return {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    }
+}
+
 // This functions adds a new room to the database
 export async function addRoom(photo, roomType, roomPrice) {
     const formData = new FormData();
@@ -123,4 +131,65 @@ export async function getAvailableRooms(checkInDate, checkOutDate, roomType) {
     const response = await api.get(
         `/rooms/available-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`);
     return response;
+}
+
+export async function registerUser(registration) {
+    try {
+        const response = await api.post("/auth/register", registration);
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data)
+        } else {
+            throw new Error(`User registration error: ${error.message}`)
+        }
+    }
+}
+
+export async function loginUser(login) {
+    console.log(login);
+    try {
+        const response = await api.post("/auth/login", login);
+        if (response.status >= 200 && response.status < 300) {
+            return response.data;
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+export async function getUserProfile(userId, token) {
+    try {
+        const response = await api.get(`/users/profile/${userId}`, {
+            headers: getHeader()
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function deleteUser(userId) {
+    try {
+        const response = await api.delete(`/users/delete/${userId}`, {
+            headers: getHeader()
+        })
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+export async function getUser(userId, token) {
+    try {
+        const response = await api.get(`/users/${userId}`, {
+            headers: getHeader()
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 }

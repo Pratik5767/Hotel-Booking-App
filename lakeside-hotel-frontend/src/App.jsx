@@ -14,6 +14,9 @@ import CheckOut from './components/bookings/CheckOut.jsx'
 import BookingSuccess from './components/bookings/BookingSuccess.jsx'
 import Bookings from './components/bookings/Bookings.jsx'
 import FindBooking from './components/bookings/FindBooking.jsx'
+import Login from './components/auth/Login.jsx'
+import Registration from './components/auth/Registration.jsx'
+import Profile from './components/auth/Profile.jsx'
 
 const App = () => {
     return (
@@ -31,6 +34,11 @@ const App = () => {
                 <Route path='/booking-success' element={<BookingSuccess />} />
                 <Route path='/existing-bookings' element={<Bookings />} />
                 <Route path='/find-bookings' element={<FindBooking />} />
+
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Registration />} />
+                <Route path='/profile' element={<Profile />} />
+                <Route path='/logout' element={<Profile />} />
             </Routes>
 
             <Footer />
