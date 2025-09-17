@@ -1,3 +1,4 @@
+/* ✅ Existing CSS (unchanged) */
 body {
     min-height: 100vh;
     padding-bottom: 50px;
@@ -45,6 +46,11 @@ body {
     color: rgb(25, 24, 24);
 }
 
+.nav-hover:hover {
+    color: #a94d7b;
+    transition: color 0.3s ease-in-out;
+}
+
 @media screen and (min-width: 992px) {
     .navbar {
         padding: 0;
@@ -71,7 +77,6 @@ body {
     transition: 0.7s;
     outline-color: transparent;
     outline-style: solid;
-
 }
 
 .hotel-color {
@@ -84,12 +89,30 @@ body {
     font-size: medium;
 }
 
+.room-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.browse-link {
+    transition: color 0.3s ease-in-out;
+}
+
+.browse-link:hover {
+    color: rgb(255, 29, 142);
+    cursor: pointer;
+}
+
 .vertical-rule {
     border-left: '0.5px solid black';
     height: '100vh'
 }
-
-
 
 .parallax {
     background-image: url("./assets/images/parrall.jpeg");
@@ -97,7 +120,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 75vh;
+    height: 70vh;
 }
 
 .header {
@@ -164,7 +187,39 @@ h2 {
 
 .bounceIn {
     animation-name: bounceIn;
+    padding-top: 80px;
 }
+
+@media (max-width: 1200px) {
+    .bounceIn {
+        padding-top: 70px;
+    }
+}
+
+@media (max-width: 992px) {
+    .bounceIn {
+        padding-top: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bounceIn {
+        padding-top: 50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .bounceIn {
+        padding-top: 40px;
+    }
+}
+
+@media (max-width: 400px) {
+    .bounceIn {
+        padding-top: 30px;
+    }
+}
+
 
 @keyframes fadeInDown {
     from {
@@ -243,4 +298,57 @@ h2 {
     background-color: #f5f5f5;
     height: 60px;
     text-align: center;
+}
+
+.header-banner h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    animation: fadeInDown 1.5s ease-in-out;
+}
+
+.header-banner h4 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #f8f8f8;
+    margin-top: 10px;
+    animation: fadeInUp 1.8s ease-in-out;
+}
+
+.header-banner .overlay-content {
+    text-align: center;
+    max-width: 80%;
+    margin: auto;
+}
+
+.header-banner button {
+    margin-top: 20px;
+    background-color: rgb(169, 77, 123);
+    color: white;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+.header-banner button:hover {
+    background-color: rgb(137, 127, 132);
+    transform: scale(1.05);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.service-card {
+    border-radius: 12px;
+    background: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 12px rgba(32, 30, 30, 0.2);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.25);
 }

@@ -8,89 +8,59 @@ const HotelServices = () => {
             <Container className="mb-2">
                 <Header title={"Our Services"} />
 
-                <Row className="mt-4">
-                    <h4 className="flex text-center gap-2">
-                        Services at <span className="hotel-color">lakeSide - </span>Hotel
-                        <br />
-                        <span className="gap-2">
-                            <FaClock className="ml-5" /> - 24-Hour Front Desk
+                <Row className="mt-3 text-center">
+                    <h4 className="flex flex-col gap-2 fw-bold">
+                        Services at <span className="hotel-color">LakeSide Hotel</span>
+
+                        <span className="gap-2 text-muted fs-4">
+                            <FaClock className="ms-2" /> 24-Hour Front Desk
                         </span>
                     </h4>
                 </Row>
-                <hr />
+
+                <hr className="w-50 mx-auto mb-4" style={{ border: "1px solid #a94d7b" }} />
 
                 <Row xs={1} md={2} lg={3} className="g-4 mt-2">
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title className="hotel-color">
-                                    <FaWifi /> WiFi
-                                </Card.Title>
+                    {
+                        [
+                            {
+                                icon: <FaWifi />,
+                                title: "WiFi", text: "Stay connected with high speed internet access."
+                            },
+                            {
+                                icon: <FaUtensils />,
+                                title: "Breakfast", text: "Start your day with a delicious breakfast buffet."
+                            },
+                            {
+                                icon: <FaTshirt />,
+                                title: "Laundry", text: "Keep your clothes clean and fresh with our laundry service."
+                            },
+                            {
 
-                                <Card.Text>Stay connected with high speed internet access.</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                                icon: <FaCocktail />,
+                                title: "Mini-bar", text: "Enjoy a refreshing drink or snack from our in-room mini-bar."
+                            },
+                            {
+                                icon: <FaParking />,
+                                title: "Parking", text: "Park your car conveniently in our on-site parking lot."
+                            },
+                            {
+                                icon: <FaSnowflake />,
+                                title: "Air Conditioning", text: "Stay cool and comfortable with our air conditioning system."
+                            }
+                        ].map((service, idx) => (
+                            <Col key={idx}>
+                                <Card className="h-100 border-1 shadow-sm service-card">
+                                    <Card.Body className="text-center">
+                                        <Card.Title className="hotel-color fs-4 mb-2 d-flex align-items-center justify-content-center gap-2">
+                                            {service.icon} {service.title}
+                                        </Card.Title>
 
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title className="hotel-color">
-                                    <FaUtensils /> Breakfast
-                                </Card.Title>
-
-                                <Card.Text>Start your day with a delicious breakfast buffet.</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title className="hotel-color">
-                                    <FaTshirt /> Laundry
-                                </Card.Title>
-
-                                <Card.Text>Keep your clothes clean and fresh with our laundry service.</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title className="hotel-color">
-                                    <FaCocktail /> Mini-bar
-                                </Card.Title>
-
-                                <Card.Text>Enjoy a refreshing drink or snack from our in-room mini-bar.</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title className="hotel-color">
-                                    <FaParking /> Parking
-                                </Card.Title>
-
-                                <Card.Text>Park your car conveniently in our on-site parking lot.</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title className="hotel-color">
-                                    <FaSnowflake /> Air conditioning
-                                </Card.Title>
-
-                                <Card.Text>Stay cool and comfortable with our air conditioning system.</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                                        <Card.Text className="text-muted">{service.text}</Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
                 </Row>
             </Container>
             <hr />

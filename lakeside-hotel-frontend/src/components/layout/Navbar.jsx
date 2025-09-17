@@ -15,10 +15,10 @@ const Navbar = () => {
     const userRole = localStorage.getItem('userRole');
 
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary px-5 shadow sticky-top mt-5">
+        <nav className="navbar navbar-expand-lg bg-light p-1 shadow-sm sticky-top mt-5">
             <div className="container-fluid">
-                <Link to={"/"} className="navbar-brand">
-                    <span className="hotel-color">lakeSide Hotel</span>
+                <Link to={"/"} className="navbar-brand fw-bold fs-3">
+                    <span className="hotel-color text-uppercase">lakeSide Hotel</span>
                 </Link>
 
                 <button
@@ -36,58 +36,50 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarScroll">
                     <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                         <li className="nav-item">
-                            <NavLink className="nav-link" aria-current="page" to={"/browse-all-rooms"}>
-                                Browse all rooms
+                            <NavLink className="nav-link fw-semibold nav-hover" to={"/browse-all-rooms"}>
+                                Browse All Rooms
                             </NavLink>
                         </li>
 
                         {
-                            isLoggedIn && userRole == "ROLE_ADMIN" && (
+                            isLoggedIn && userRole === "ROLE_ADMIN" && (
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" aria-current="page" to={"/admin"}>
+                                    <NavLink className="nav-link fw-semibold nav-hover" to={"/admin"}>
                                         Admin
                                     </NavLink>
                                 </li>
                             )
                         }
-
                     </ul>
 
-                    <ul className="d-flex navbar-nav">
+                    <ul className="navbar-nav d-flex align-items-center">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to={"/find-bookings"}>
-                                Find my boookings
+                            <NavLink className="nav-link fw-semibold nav-hover" to={"/find-bookings"}>
+                                Find My Bookings
                             </NavLink>
                         </li>
 
                         <li className="nav-item dropdown">
                             <a
-                                className={`nav-link dropdown-toggle ${showAccount ? "show" : ""}`}
+                                className={`nav-link dropdown-toggle fw-semibold nav-hover ${showAccount ? "show" : ""}`}
                                 href="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                                 onClick={handleAccountClick}
                             >
-                                {" "}
                                 Account
                             </a>
 
                             <ul
-                                className={`dropdown-menu ${showAccount ? "show" : ""}`}
+                                className={`dropdown-menu dropdown-menu-end shadow ${showAccount ? "show" : ""}`}
                                 aria-labelledby="navbarDropdown"
                             >
                                 {
                                     isLoggedIn ? (
-                                        <li>
-                                            <Logout />
-                                        </li>
+                                        <li><Logout /></li>
                                     ) : (
-                                        <li>
-                                            <Link to={"/login"} className="dropdown-item">
-                                                Login
-                                            </Link>
-                                        </li>
+                                        <li><Link to={"/login"} className="dropdown-item">Login</Link></li>
                                     )
                                 }
                             </ul>
