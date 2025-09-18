@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { cancelBooking, getBookingByConfirmationCode } from "../utils/ApiFunctions";
+import moment from "moment";
 
 const FindBooking = () => {
 
     const [confirmationCode, setConfirmationCode] = useState("");
-    const [errorMsg, setErrorMsg] = useState(null);
+    const [error, setError] = useState(null);
     const [successMsg, setSuccessMsg] = useState("");
     const [loading, setLoading] = useState(false);
     const [bookingInfo, setBookingInfo] = useState({
@@ -52,13 +53,13 @@ const FindBooking = () => {
         try {
             const data = await getBookingByConfirmationCode(confirmationCode);
             setBookingInfo(data);
-            setErrorMsg(null);
+            setError(null);
         } catch (error) {
-            setBookingInfo(clearBookingInfo);
+            setBookingInfo(clearBookingInfo)
             if (error.response && error.response.status === 404) {
-                setErrorMsg(error.response.data.message);
+                setError(error.response.data.message)
             } else {
-                setErrorMsg(error.response);
+                setError(error.message)
             }
         }
 
@@ -74,7 +75,7 @@ const FindBooking = () => {
             setSuccessMsg("Booking has been cancelled successfully!");
             setBookingInfo(clearBookingInfo);
             setConfirmationCode("");
-            setErrorMsg(null);
+            setError(null);
         } catch (error) {
             setErrorMsg(error.message);
         }
@@ -111,18 +112,28 @@ const FindBooking = () => {
                             <div className="spinner-border text-primary me-3" role="status" aria-hidden="true"></div>
                             <strong>Finding booking....</strong>
                         </div>
-                    ) : errorMsg ? (
-                        <div className="text-danger">Error: {errorMsg}</div>
+                    ) : error ? (
+                        <div className="text-danger">Error: {error}</div>
                     ) : bookingInfo.bookingConfirmationCode ? (
                         <div className="col-md-6 mt-4 mb-5">
                             <h3>Booking Information</h3>
 
-                            <p>Booking Confirmation Code: {bookingInfo.bookingConfirmationCode}</p>
+                            <p className="text-success">Confirmation Code: {bookingInfo.bookingConfirmationCode}</p>
                             <p>Booking Id: {bookingInfo.id}</p>
                             <p>Room Number: {bookingInfo.room.id}</p>
                             <p>Room Type: {bookingInfo.room.roomType}</p>
-                            <p>Check-in Date: {bookingInfo.checkInDate}</p>
-                            <p>Check-out Date: {bookingInfo.checkOutDate}</p>
+                            <p>
+                                Check-in Date: {" "}
+                                {
+                                    moment(bookingInfo.checkInDate).subtract(1, "month").format("MMM Do, YYYY")
+                                }
+                            </p>
+                            <p>
+                                Check-out Date: {" "}
+                                {
+                                    moment(bookingInfo.checkOutDate).subtract(1, "month").format("MMM Do, YYYY")
+                                }
+                            </p>
                             <p>Full Name: {bookingInfo.guestFullName}</p>
                             <p>Email Address: {bookingInfo.guestEmail}</p>
                             <p>Adults: {bookingInfo.numOfAdults}</p>
@@ -141,7 +152,7 @@ const FindBooking = () => {
                             }
                         </div>
                     ) : (
-                        <div>Find booking....</div>
+                        <div>Find booking</div>
                     )
                 }
 

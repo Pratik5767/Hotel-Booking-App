@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { deleteUser, getUser } from "../utils/ApiFunctions"
+import { deleteUser, getBookingsByUserId, getUser } from "../utils/ApiFunctions"
 import { useNavigate } from "react-router-dom"
 import moment from "moment"
 
@@ -12,15 +12,15 @@ const Profile = () => {
         roles: [{ id: "", name: "" }]
     })
 
-    // const [bookings, setBookings] = useState([
-    //     {
-    //         id: "",
-    //         room: { id: "", roomType: "" },
-    //         checkInDate: "",
-    //         checkOutDate: "",
-    //         bookingConfirmationCode: ""
-    //     }
-    // ])
+    const [bookings, setBookings] = useState([
+        {
+            id: "",
+            room: { id: "", roomType: "" },
+            checkInDate: "",
+            checkOutDate: "",
+            bookingConfirmationCode: ""
+        }
+    ])
 
     const [message, setMessage] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
@@ -42,19 +42,19 @@ const Profile = () => {
         fetchUser()
     }, [userId])
 
-    // useEffect(() => {
-    //     const fetchBookings = async () => {
-    //         try {
-    //             const response = await getBookingsByUserId(userId, token)
-    //             setBookings(response)
-    //         } catch (error) {
-    //             console.error("Error fetching bookings:", error.message)
-    //             setErrorMessage(error.message)
-    //         }
-    //     }
+    useEffect(() => {
+        const fetchBookings = async () => {
+            try {
+                const response = await getBookingsByUserId(userId, token)
+                setBookings(response)
+            } catch (error) {
+                console.error("Error fetching bookings:", error.message)
+                setErrorMessage(error.message)
+            }
+        }
 
-    //     fetchBookings()
-    // }, [userId])
+        fetchBookings()
+    }, [userId])
 
     const handleDeleteAccount = async () => {
         const confirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
@@ -94,12 +94,12 @@ const Profile = () => {
                                 <div className="card mb-3 shadow">
                                     <div className="row g-0">
                                         <div className="col-md-2">
-                                            <div className="d-flex justify-content-center align-items-center mb-4">
+                                            <div className="d-flex justify-content-center align-items-center mt-3">
                                                 <img
                                                     src="https://themindfulaimanifesto.org/wp-content/uploads/2020/09/male-placeholder-image.jpeg"
                                                     alt="Profile"
                                                     className="rounded-circle"
-                                                    style={{ width: "150px", height: "150px", objectFit: "cover" }}
+                                                    style={{ width: "120px", height: "120px", objectFit: "cover" }}
                                                 />
                                             </div>
                                         </div>
@@ -162,7 +162,7 @@ const Profile = () => {
                                     </div>
                                 </div>
 
-                                {/* <h4 className="card-title text-center">Booking History</h4>
+                                <h4 className="card-title text-center">Booking History</h4>
 
                                 {
                                     bookings.length > 0 ? (
@@ -199,7 +199,7 @@ const Profile = () => {
                                             </tbody>
                                         </table>
                                     ) : (
-                                        <p>You have not made any bookings yet.</p>
+                                        <p className="text-center pt-3">You have not made any bookings yet.</p>
                                     )
                                 }
 
@@ -209,7 +209,7 @@ const Profile = () => {
                                             Close account
                                         </button>
                                     </div>
-                                </div> */}
+                                </div>
                             </div>
                         </div>
                     </div>

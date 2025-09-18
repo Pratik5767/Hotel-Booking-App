@@ -14,4 +14,6 @@ public interface IBookingService {
     String saveBookings(Long roomId, BookedRoom bookingRequest);
 
     void cancelBooking(Long bookingId);
+
+    List<BookedRoom> getBookingsByUserEmail(String email);
 }

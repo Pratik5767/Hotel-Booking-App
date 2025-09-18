@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { AuthContext } from "./AuthProvider"
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,12 +9,16 @@ const Logout = () => {
     const handleLogout = () => {
         auth.handleLogout();
         window.location.reload();
-        navigate("/", { state: { message: "You have been logged out!" } });
+        navigate("/", { state: { message: "You have been logged out!", type: "warning" } });
     }
 
-    const isLoggedIn = auth.user !== null;
+    useEffect(() => {
+        if (auth.user == null) {
+            window.location.reload();
+        }
+    }, [])
 
-    return isLoggedIn ? (
+    return (
         <>
             <li>
                 <Link className="dropdown-item" to={"/profile"}>Profile</Link>
@@ -26,7 +30,7 @@ const Logout = () => {
 
             <button className="dropdown-item" onClick={handleLogout}>Logout</button>
         </>
-    ) : null
+    )
 }
 
 export default Logout

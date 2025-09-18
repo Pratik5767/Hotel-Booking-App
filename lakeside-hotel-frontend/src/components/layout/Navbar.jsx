@@ -1,21 +1,39 @@
-import { useContext, useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import Logout from "../auth/Logout";
-import { AuthContext } from "../auth/AuthProvider";
 
 const Navbar = () => {
     const [showAccount, setShowAccount] = useState(false);
-    const { user } = useContext(AuthContext);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userRole, setUserRole] = useState("");
 
     const handleAccountClick = () => {
         setShowAccount(!showAccount);
     }
 
-    const isLoggedIn = user !== null;
-    const userRole = localStorage.getItem('userRole');
+    useEffect(() => {
+        const checkLoginState = () => {
+            const token = localStorage.getItem('token');
+            const role = localStorage.getItem('userRole');
+
+            if (token) {
+                setIsLoggedIn(true);
+                setUserRole(role);
+            } else {
+                setIsLoggedIn(false);
+                setUserRole("");
+            }
+        }
+        checkLoginState();
+
+        window.addEventListener("storage", checkLoginState);
+        return () => {
+            window.removeEventListener("storage", checkLoginState);
+        };
+    }, [])
 
     return (
-        <nav className="navbar navbar-expand-lg bg-light p-1 shadow-sm sticky-top mt-5">
+        <nav className="navbar navbar-expand-lg bg-light p-1 shadow-sm sticky-top">
             <div className="container-fluid">
                 <Link to={"/"} className="navbar-brand fw-bold fs-3">
                     <span className="hotel-color text-uppercase">lakeSide Hotel</span>
@@ -36,7 +54,7 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarScroll">
                     <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                         <li className="nav-item">
-                            <NavLink className="nav-link fw-semibold nav-hover" to={"/browse-all-rooms"}>
+                            <NavLink className="nav-link fw-semibold nav-hover" aria-current="page" to={"/browse-all-rooms"}>
                                 Browse All Rooms
                             </NavLink>
                         </li>
@@ -44,7 +62,7 @@ const Navbar = () => {
                         {
                             isLoggedIn && userRole === "ROLE_ADMIN" && (
                                 <li className="nav-item">
-                                    <NavLink className="nav-link fw-semibold nav-hover" to={"/admin"}>
+                                    <NavLink className="nav-link fw-semibold nav-hover" aria-current="page" to={"/admin"}>
                                         Admin
                                     </NavLink>
                                 </li>
@@ -77,9 +95,13 @@ const Navbar = () => {
                             >
                                 {
                                     isLoggedIn ? (
-                                        <li><Logout /></li>
+                                        <Logout />
                                     ) : (
-                                        <li><Link to={"/login"} className="dropdown-item">Login</Link></li>
+                                        <li>
+                                            <Link to={"/login"} className="dropdown-item">
+                                                Login
+                                            </Link>
+                                        </li>
                                     )
                                 }
                             </ul>

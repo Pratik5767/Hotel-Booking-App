@@ -17,6 +17,7 @@ import FindBooking from './components/bookings/FindBooking.jsx'
 import Login from './components/auth/Login.jsx'
 import Registration from './components/auth/Registration.jsx'
 import Profile from './components/auth/Profile.jsx'
+import RequireAuth from './components/auth/RequireAuth.jsx'
 
 const App = () => {
     return (
@@ -25,20 +26,77 @@ const App = () => {
 
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/edit-room/:roomId' element={<EditRoom />} />
-                <Route path='/existing-rooms' element={<ExistingRooms />} />
-                <Route path='/add-room' element={<AddRoom />} />
-                <Route path='/book-room/:roomId' element={<CheckOut />} />
+
+                <Route
+                    path='/edit-room/:roomId'
+                    element={
+                        <RequireAuth requireAdmin={true}>
+                            <EditRoom />
+                        </RequireAuth>
+                    }
+                />
+
+                <Route
+                    path='/existing-rooms'
+                    element={
+                        <RequireAuth requireAdmin={true}>
+                            <ExistingRooms />
+                        </RequireAuth>
+                    }
+                />
+
+                <Route
+                    path='/add-room'
+                    element={
+                        <RequireAuth requireAdmin={true}>
+                            <AddRoom />
+                        </RequireAuth>
+                    }
+                />
+
+                <Route
+                    path='/book-room/:roomId'
+                    element={
+                        <RequireAuth>
+                            <CheckOut />
+                        </RequireAuth>
+                    }
+                />
+
                 <Route path='/browse-all-rooms' element={<RoomListing />} />
-                <Route path='/admin' element={<Admin />} />
+
+                <Route
+                    path='/admin'
+                    element={
+                        <RequireAuth requireAdmin={true}>
+                            <Admin />
+                        </RequireAuth>
+                    }
+                />
+
                 <Route path='/booking-success' element={<BookingSuccess />} />
-                <Route path='/existing-bookings' element={<Bookings />} />
+
+                <Route
+                    path='/existing-bookings'
+                    element={
+                        <RequireAuth requireAdmin={true}>
+                            <Bookings />
+                        </RequireAuth>
+                    }
+                />
                 <Route path='/find-bookings' element={<FindBooking />} />
 
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Registration />} />
-                <Route path='/profile' element={<Profile />} />
-                <Route path='/logout' element={<Profile />} />
+
+                <Route
+                    path='/profile'
+                    element={
+                        <RequireAuth>
+                            <Profile />
+                        </RequireAuth>
+                    }
+                />
             </Routes>
 
             <Footer />

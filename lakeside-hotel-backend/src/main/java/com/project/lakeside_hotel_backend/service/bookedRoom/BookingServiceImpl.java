@@ -57,6 +57,11 @@ public class BookingServiceImpl implements IBookingService {
         bookingRepository.deleteById(bookingId);
     }
 
+    @Override
+    public List<BookedRoom> getBookingsByUserEmail(String email) {
+        return bookingRepository.findByGuestEmail(email);
+    }
+
     private boolean roomIsAvailable(BookedRoom bookingRequest, List<BookedRoom> existingBookings) {
         return existingBookings.stream().noneMatch(
                 existingBooking -> bookingRequest.getCheckInDate().equals(existingBooking.getCheckInDate())

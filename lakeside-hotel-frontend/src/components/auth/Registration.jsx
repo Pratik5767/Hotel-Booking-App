@@ -43,13 +43,17 @@ const Registration = () => {
 
     return (
         <section className="container col-6 mt-5 mb-5 p-4 shadow-lg rounded bg-light">
-            {errorMessage && (
-                <div className="alert alert-danger text-center fw-bold">{errorMessage}</div>
-            )}
+            {
+                errorMessage && (
+                    <div className="alert alert-danger text-center fw-bold">{errorMessage}</div>
+                )
+            }
 
-            {successMessage && (
-                <div className="alert alert-success text-center fw-bold">{successMessage}</div>
-            )}
+            {
+                successMessage && (
+                    <div className="alert alert-success text-center fw-bold">{successMessage}</div>
+                )
+            }
 
             <h2 className="text-center mb-4 text-success">📝 Create Your Account</h2>
 
