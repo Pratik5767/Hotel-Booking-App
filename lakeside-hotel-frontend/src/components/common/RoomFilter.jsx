@@ -19,11 +19,18 @@ const RoomFilter = ({ data, setFilteredData }) => {
     const roomTypes = ["", ...new Set(data.map((room) => room.roomType))]
 
     return (
-        <div className="input-group mb-3">
-            <span className="input-group-text" id="room-type-filter">Filter rooms by type</span>
+        <div className="input-group mb-4 shadow-sm">
+            <span className="input-group-text bg-primary text-white fw-semibold" id="room-type-filter">
+                Filter Rooms
+            </span>
 
-            <select className="form-select" value={filter} onChange={handleSelectChange}>
-                <option value={""}>select a room type to filter...</option>
+            <select
+                className="form-select"
+                value={filter}
+                onChange={handleSelectChange}
+                aria-label="Filter rooms by type"
+            >
+                <option value={""}>Select a room type...</option>
                 {
                     roomTypes.map((type, index) => (
                         <option key={index} value={type}>{type}</option>
@@ -31,8 +38,11 @@ const RoomFilter = ({ data, setFilteredData }) => {
                 }
             </select>
 
-            <button className="btn btn-hotel" type="button" onClick={clearFilter}>Clear Filter</button>
+            <button className="btn btn-outline-danger fw-semibold" type="button" onClick={clearFilter}>
+                Clear
+            </button>
         </div>
+
     )
 }
 

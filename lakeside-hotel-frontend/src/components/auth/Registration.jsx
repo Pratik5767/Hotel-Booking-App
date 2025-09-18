@@ -59,12 +59,12 @@ const Registration = () => {
 
             <form onSubmit={handleRegistration}>
                 <div className="mb-3">
-                    <label htmlFor="firstname" className="form-label fw-semibold">
+                    <label htmlFor="firstName" className="form-label fw-semibold">
                         First Name
                     </label>
                     <input
-                        id="firstname"
-                        name="firstname"
+                        id="firstName"
+                        name="firstName"
                         type="text"
                         className="form-control form-control-lg"
                         placeholder="Enter your first name"
@@ -75,12 +75,12 @@ const Registration = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="lastname" className="form-label fw-semibold">
+                    <label htmlFor="lastName" className="form-label fw-semibold">
                         Last Name
                     </label>
                     <input
-                        id="lastname"
-                        name="lastname"
+                        id="lastName"
+                        name="lastName"
                         type="text"
                         className="form-control form-control-lg"
                         placeholder="Enter your last name"
@@ -124,7 +124,7 @@ const Registration = () => {
 
                 <div className="d-grid gap-2">
                     <button type="submit" className="btn btn-success btn-lg shadow-sm">
-                        ✅ Register
+                        Register
                     </button>
                 </div>
 

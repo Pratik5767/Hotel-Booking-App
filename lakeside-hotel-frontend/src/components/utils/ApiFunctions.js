@@ -4,12 +4,16 @@ export const api = axios.create({
     baseURL: "http://localhost:9000"
 })
 
-export const getHeader = () => {
+export const getHeader = (isFormData = false) => {
     const token = localStorage.getItem("token");
-    return {
+    const headers = {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
+    };
+
+    if (!isFormData) {
+        headers['Content-Type'] = 'application/json';
     }
+    return headers;
 }
 
 // This functions adds a new room to the database
@@ -21,7 +25,7 @@ export async function addRoom(photo, roomType, roomPrice) {
     formData.append("roomPrice", roomPrice)
 
     const response = await api.post("/rooms/add/new-room", formData, {
-        headers: getHeader()
+        headers: getHeader(true)
     });
     if (response.status === 201) {
         return true;
@@ -54,7 +58,7 @@ export async function getAllRooms() {
 export async function deleteRoom(roomId) {
     try {
         const response = await api.delete(`/rooms/delete/room/${roomId}`, {
-            headers: getHeader()
+            headers: getHeader(false)
         });
         return response.data;
     } catch (error) {
@@ -69,7 +73,7 @@ export async function updateRoom(roomId, roomData) {
     formData.append("roomPrice", roomData.roomPrice);
     formData.append("photo", roomData.photo);
     const response = await api.put(`/rooms/update/${roomId}`, formData, {
-        headers: getHeader()
+        headers: getHeader(true)
     });
     return response;
 }
@@ -102,7 +106,7 @@ export async function bookRoom(roomId, booking) {
 export async function getAllBookings() {
     try {
         const response = await api.get(`/bookings/all-bookings`, {
-            headers: getHeader()
+            headers: getHeader(false)
         });
         return response.data;
     } catch (error) {
@@ -172,7 +176,7 @@ export async function loginUser(login) {
 export async function getUserProfile(userId, token) {
     try {
         const response = await api.get(`/users/profile/${userId}`, {
-            headers: getHeader()
+            headers: getHeader(false)
         });
         return response.data;
     } catch (error) {
@@ -183,7 +187,7 @@ export async function getUserProfile(userId, token) {
 export async function deleteUser(userId) {
     try {
         const response = await api.delete(`/users/delete/${userId}`, {
-            headers: getHeader()
+            headers: getHeader(false)
         })
         return response.data;
     } catch (error) {
@@ -194,7 +198,7 @@ export async function deleteUser(userId) {
 export async function getUser(userId, token) {
     try {
         const response = await api.get(`/users/${userId}`, {
-            headers: getHeader()
+            headers: getHeader(false)
         });
         return response.data;
     } catch (error) {
@@ -206,7 +210,7 @@ export async function getUser(userId, token) {
 export async function getBookingsByUserId(userId, token) {
     try {
         const response = await api.get(`/bookings/user/${userId}/bookings`, {
-            headers: getHeader()
+            headers: getHeader(false)
         })
         return response.data
     } catch (error) {

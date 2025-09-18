@@ -12,12 +12,6 @@ const Logout = () => {
         navigate("/", { state: { message: "You have been logged out!", type: "warning" } });
     }
 
-    useEffect(() => {
-        if (auth.user == null) {
-            window.location.reload();
-        }
-    }, [])
-
     return (
         <>
             <li>

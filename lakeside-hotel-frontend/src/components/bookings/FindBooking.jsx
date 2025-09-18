@@ -77,7 +77,7 @@ const FindBooking = () => {
             setConfirmationCode("");
             setError(null);
         } catch (error) {
-            setErrorMsg(error.message);
+            setError(error.message);
         }
 
         setTimeout(() => {
@@ -89,80 +89,108 @@ const FindBooking = () => {
     return (
         <>
             <div className="container mt-5 d-flex flex-column justify-content-center align-items-center">
-                <h2>Find My Booking</h2>
+                <h2 className="fw-bold text-primary mb-4">Find My Booking</h2>
 
-                <form onSubmit={handleFormSubmit} className="col-md-6">
-                    <div className="input-group mb-3">
+                <form onSubmit={handleFormSubmit} className="col-md-6 shadow-sm p-3 rounded bg-light">
+                    <div className="input-group">
                         <input
                             className="form-control"
                             id="confirmationCode"
                             name="confirmationCode"
                             value={confirmationCode}
                             onChange={handleInputChange}
-                            placeholder="Enter the booking confirmation code"
+                            placeholder="Enter your booking confirmation code"
                         />
 
-                        <button className="btn btn-hotel input-group-text">Find booking</button>
+                        <button className="btn btn-primary input-group-text rounded-end">
+                            <i className="bi bi-search me-1"></i> Find
+                        </button>
                     </div>
                 </form>
 
                 {
-                    loading ? (
+                    loading && (
                         <div className="d-flex align-items-center justify-content-center my-4">
-                            <div className="spinner-border text-primary me-3" role="status" aria-hidden="true"></div>
-                            <strong>Finding booking....</strong>
-                        </div>
-                    ) : error ? (
-                        <div className="text-danger">Error: {error}</div>
-                    ) : bookingInfo.bookingConfirmationCode ? (
-                        <div className="col-md-6 mt-4 mb-5">
-                            <h3>Booking Information</h3>
+                            <div className="spinner-border text-primary me-3" role="status" aria-hidden="true" />
 
-                            <p className="text-success">Confirmation Code: {bookingInfo.bookingConfirmationCode}</p>
-                            <p>Booking Id: {bookingInfo.id}</p>
-                            <p>Room Number: {bookingInfo.room.id}</p>
-                            <p>Room Type: {bookingInfo.room.roomType}</p>
-                            <p>
-                                Check-in Date: {" "}
-                                {
-                                    moment(bookingInfo.checkInDate).subtract(1, "month").format("MMM Do, YYYY")
-                                }
-                            </p>
-                            <p>
-                                Check-out Date: {" "}
-                                {
-                                    moment(bookingInfo.checkOutDate).subtract(1, "month").format("MMM Do, YYYY")
-                                }
-                            </p>
-                            <p>Full Name: {bookingInfo.guestFullName}</p>
-                            <p>Email Address: {bookingInfo.guestEmail}</p>
-                            <p>Adults: {bookingInfo.numOfAdults}</p>
-                            <p>Children: {bookingInfo.numOfChildren}</p>
-                            <p>Total Guest: {bookingInfo.totalNumOfGuest}</p>
-
-                            {
-                                !isDeleted && (
-                                    <button
-                                        className="btn btn-danger"
-                                        onClick={() => handleBookingCancelation(bookingInfo.id)}
-                                    >
-                                        Cancel Booking
-                                    </button>
-                                )
-                            }
+                            <strong>Finding booking...</strong>
                         </div>
-                    ) : (
-                        <div>Find booking</div>
+                    )
+                }
+
+                {
+                    error && (
+                        <div className="alert alert-danger mt-4 col-md-6 text-center shadow-sm" role="alert">
+                            <i className="bi bi-exclamation-triangle-fill me-2"></i> {error}
+                        </div>
+                    )
+                }
+
+                {
+                    bookingInfo.bookingConfirmationCode && !loading && !error && (
+                        <div className="card col-md-6 mt-4 mb-5 shadow-lg border-0">
+                            <div className="card-body">
+                                <h3 className="card-title text-center text-success">Booking Information</h3>
+                                <hr />
+
+                                <p className="text-success fw-bold">
+                                    <i className="bi bi-check-circle-fill me-1"></i>
+                                    Confirmation Code: {bookingInfo.bookingConfirmationCode}
+                                </p>
+
+                                <p><strong>Booking ID:</strong> {bookingInfo.id}</p>
+
+                                <p><strong>Room Number:</strong> {bookingInfo.room.id}</p>
+
+                                <p><strong>Room Type:</strong> {bookingInfo.room.roomType}</p>
+
+                                <p><strong>Check-in Date:</strong> {moment(bookingInfo.checkInDate).subtract(1, "month").format("MMM Do, YYYY")}</p>
+
+                                <p><strong>Check-out Date:</strong> {moment(bookingInfo.checkOutDate).subtract(1, "month").format("MMM Do, YYYY")}</p>
+
+                                <p><strong>Full Name:</strong> {bookingInfo.guestFullName}</p>
+
+                                <p><strong>Email Address:</strong> {bookingInfo.guestEmail}</p>
+
+                                <p><strong>Adults:</strong> {bookingInfo.numOfAdults}</p>
+
+                                <p><strong>Children:</strong> {bookingInfo.numOfChildren}</p>
+
+                                <p><strong>Total Guests:</strong> {bookingInfo.totalNumOfGuest}</p>
+
+                                {
+                                    !isDeleted && (
+                                        <button
+                                            className="btn btn-danger w-100 mt-3 shadow-sm"
+                                            onClick={() => handleBookingCancelation(bookingInfo.id)}
+                                        >
+                                            <i className="bi bi-trash me-2"></i> Cancel Booking
+                                        </button>
+                                    )
+                                }
+                            </div>
+                        </div>
                     )
                 }
 
                 {
                     isDeleted && (
-                        <div className="alert alert-success mt-3" role="alert">{successMsg}</div>
+                        <div className="alert alert-success mt-3 col-md-6 text-center shadow-sm" role="alert">
+                            <i className="bi bi-check-circle-fill me-2"></i> {successMsg}
+                        </div>
+                    )
+                }
+
+                {
+                    !bookingInfo.bookingConfirmationCode && !loading && !error && (
+                        <div className="text-muted mt-4">
+                            Enter a confirmation code above to find your booking.
+                        </div>
                     )
                 }
             </div>
         </>
+
     )
 }
 

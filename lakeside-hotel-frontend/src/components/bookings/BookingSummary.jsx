@@ -28,40 +28,69 @@ const BookingSummary = ({ booking, payment, isFormValid, onConfirm }) => {
     }, [isBookingConfirmed, navigate])
 
     return (
-        <div className="card card-body mt-5">
-            <h4 className="card-title">Reservation Summary</h4>
+        <div className="card shadow-lg rounded-4 p-4 border-0">
+            <h3 className="card-title text-center text-success fw-bold text-primary mb-4">
+                Booking Summary
+            </h3>
 
-            <p>FullName: <strong>{booking.guestFullName}</strong></p>
-            <p>Email: <strong>{booking.guestEmail}</strong></p>
-            <p>checkInDate: <strong>{moment(booking.checkInDate).format("MMM Do YYYY")}</strong></p>
-            <p>checkOutDate: <strong>{moment(booking.checkOutDate).format("MMM Do YYYY")}</strong></p>
-            <p>Number of days: <strong>{numberOfDays}</strong></p>
+            <div className="mb-4 mt-3">
+                <p className="mb-1">
+                    <strong className="text-secondary">Full Name:</strong> {booking.guestFullName}
+                </p>
 
-            <div>
-                <h5>Number of Guests</h5>
-                <strong>Adult{booking.numOfAdults > 1 ? "s" : ""} : {booking.numOfAdults}</strong> <br />
-                <strong>Children : {booking.numOfChildren}</strong>
+                <p className="mb-1">
+                    <strong className="text-secondary">Email:</strong> {booking.guestEmail}
+                </p>
+
+                <p className="mb-1">
+                    <strong className="text-secondary">Check-In:</strong> {moment(booking.checkInDate).format("MMM Do YYYY")}
+                </p>
+
+                <p className="mb-1">
+                    <strong className="text-secondary">Check-Out:</strong> {moment(booking.checkOutDate).format("MMM Do YYYY")}
+                </p>
+
+                <p className="mb-1">
+                    <strong className="text-secondary">Number of Days:</strong> {numberOfDays}
+                </p>
+            </div>
+
+            <div className="bg-light rounded-3 p-3 mb-3">
+                <h5 className="fw-semibold text-dark mb-2">Number of Guests</h5>
+
+                <p className="mb-1">
+                    <strong>Adult{booking.numOfAdults > 1 ? "s" : ""}:</strong> {booking.numOfAdults}
+                </p>
+
+                <p className="mb-1">
+                    <strong>Children:</strong> {booking.numOfChildren}
+                </p>
             </div>
 
             {
                 payment > 0 ? (
                     <>
-                        <p>Total Payment: <strong>${payment}</strong></p>
+                        <div className="d-flex justify-content-between align-items-center p-3 bg-white shadow-sm rounded-3 mb-3">
+                            <span className="fw-semibold fs-5 text-dark">Total Payment:</span>
+                            <span className="fw-bold fs-5 text-success">${payment}</span>
+                        </div>
 
                         {
                             isFormValid && !isBookingConfirmed ? (
-                                <Button variant='success' onClick={handleConfirmedBooking}>
+                                <Button variant="success" onClick={handleConfirmedBooking} className="w-100 py-2 rounded-pill fw-semibold shadow-sm mt-4">
                                     {
                                         isProcessingPayment ? (
                                             <>
-                                                <span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true" />
-                                                Booking confirmed, redirecting to payment....
+                                                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" />
+                                                Booking confirmed, redirecting to payment...
                                             </>
-                                        ) : ("Confirm Booking and proceed to payment")
+                                        ) : (
+                                            "Confirm Booking & Proceed to Payment"
+                                        )
                                     }
                                 </Button>
                             ) : isBookingConfirmed ? (
-                                <div className="d-flex justify-content-center align-items-center">
+                                <div className="d-flex justify-content-center align-items-center mt-3">
                                     <div className="spinner-border text-primary" role="status">
                                         <span className="sr-only">Loading...</span>
                                     </div>
@@ -70,7 +99,9 @@ const BookingSummary = ({ booking, payment, isFormValid, onConfirm }) => {
                         }
                     </>
                 ) : (
-                    <p className="text-danger">check-out date must be after check-in date</p>
+                    <p className="text-danger text-center mt-3">
+                        Check-out date must be after check-in date.
+                    </p>
                 )
             }
         </div>

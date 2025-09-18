@@ -62,26 +62,32 @@ const EditRoom = () => {
     }
 
     return (
-        <div className="container, mt-5 mb-5">
-            <h3 className="text-center mb-5 mt-5">Edit Room</h3>
-            <div className="row justify-content-center">
-                <div className="col-md-8 col-lg-6">
+        <div className="container mt-5 mb-5">
+            <h3 className="text-center fw-bold mb-4 mt-4">Edit Room</h3>
 
+            <div className="row justify-content-center">
+                <div className="col-md-8 col-lg-6 p-4 shadow rounded bg-light">
                     {
                         successMessage && (
-                            <div className="alert alert-success fade show" role="alert">{successMessage}</div>
+                            <div className="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+                                {successMessage}
+                            </div>
                         )
                     }
 
                     {
                         errorMessage && (
-                            <div className="alert alert-danger fade show" role="alert">{errorMessage}</div>
+                            <div className="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+                                {errorMessage}
+                            </div>
                         )
                     }
 
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="mt-3">
                         <div className="mb-3">
-                            <label htmlFor="roomType" className="form-label hotel-color">Room Type</label>
+                            <label htmlFor="roomType" className="form-label fw-semibold text-primary">
+                                Room Type
+                            </label>
 
                             <input
                                 type="text"
@@ -89,12 +95,15 @@ const EditRoom = () => {
                                 name="roomType"
                                 value={room.roomType}
                                 onChange={handleInputChange}
-                                className="form-control"
+                                className="form-control shadow-sm"
+                                placeholder="Enter room type"
                             />
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="roomPrice" className="form-label hotel-color">Room Price</label>
+                            <label htmlFor="roomPrice" className="form-label fw-semibold text-primary">
+                                Room Price
+                            </label>
 
                             <input
                                 type="number"
@@ -102,37 +111,47 @@ const EditRoom = () => {
                                 name="roomPrice"
                                 value={room.roomPrice}
                                 onChange={handleInputChange}
-                                className="form-control"
+                                className="form-control shadow-sm"
+                                placeholder="Enter price"
                             />
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="photo" className="form-label hotel-color">Room Photo</label>
+                            <label htmlFor="photo" className="form-label fw-semibold text-primary">
+                                Room Photo
+                            </label>
+
                             <input
                                 required
                                 type="file"
-                                className="form-control"
+                                className="form-control shadow-sm"
                                 id="photo"
                                 name="photo"
                                 onChange={handleImageChange}
                             />
+
                             {
                                 imagePreview && (
-                                    <img
-                                        src={`data:image/jpeg;base64,${imagePreview}`}
-                                        alt="room-preview"
-                                        style={{ maxWidth: "400px", maxHeight: "400px" }}
-                                        className="mt-3"
-                                    />
+                                    <div className="text-center mt-3">
+                                        <img
+                                            src={`data:image/jpeg;base64,${imagePreview}`}
+                                            alt="room-preview"
+                                            className="img-fluid rounded shadow"
+                                            style={{ maxWidth: "400px", maxHeight: "400px" }}
+                                        />
+                                    </div>
                                 )
                             }
                         </div>
 
-                        <div className="d-grid gap-2 d-md-flex mt-2">
-                            <Link to={"/existing-rooms"} className="btn btn-outline-info ml-5">
-                                back
+                        <div className="d-flex justify-content-between mt-4">
+                            <Link to={"/existing-rooms"} className="btn btn-outline-secondary shadow-sm">
+                                Back
                             </Link>
-                            <button type="submit" className="btn btn-outline-warning">Edit Room</button>
+
+                            <button type="submit" className="btn btn-warning shadow-sm">
+                                Save Changes
+                            </button>
                         </div>
                     </form>
                 </div>

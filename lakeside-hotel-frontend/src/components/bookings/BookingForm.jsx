@@ -92,15 +92,19 @@ const BookingForm = () => {
 
     return (
         <>
-            <div className="container mb-5">
-                <div className="row">
+            <div className="container my-5">
+                <div className="row g-4">
                     <div className="col-md-6">
-                        <div className="card card-body mt-5">
-                            <h4 className="card-title">Reserve Room</h4>
+                        <div className="card shadow-lg rounded-4 p-4 border-0">
+                            <h3 className="card-title text-center mb-4 text-primary fw-bold">
+                                Reserve Your Room
+                            </h3>
 
                             <Form noValidate validated={isValidated} onSubmit={handleSubmit}>
-                                <Form.Group>
-                                    <Form.Label className="hotel-color" htmlFor="guestFullName">Full Name: </Form.Label>
+                                <Form.Group className="mb-3">
+                                    <Form.Label className="fw-semibold hotel-color" htmlFor="guestFullName">
+                                        Full Name
+                                    </Form.Label>
 
                                     <FormControl
                                         required
@@ -108,17 +112,20 @@ const BookingForm = () => {
                                         id="guestFullName"
                                         name="guestFullName"
                                         value={booking.guestFullName}
-                                        placeholder="Enter your fullName"
+                                        placeholder="Enter your full name"
                                         onChange={handleInputChange}
+                                        className="rounded-pill shadow-sm"
                                     />
 
                                     <Form.Control.Feedback type="invalid">
-                                        Please enter your fullname
+                                        Please enter your full name
                                     </Form.Control.Feedback>
                                 </Form.Group>
 
-                                <Form.Group className="mt-2">
-                                    <Form.Label className="hotel-color" htmlFor="guestEmail">Email: </Form.Label>
+                                <Form.Group className="mb-3">
+                                    <Form.Label className="fw-semibold hotel-color" htmlFor="guestEmail">
+                                        Email
+                                    </Form.Label>
 
                                     <FormControl
                                         required
@@ -126,8 +133,9 @@ const BookingForm = () => {
                                         id="guestEmail"
                                         name="guestEmail"
                                         value={booking.guestEmail}
-                                        placeholder="Enter your email"
+                                        placeholder="Enter your email address"
                                         onChange={handleInputChange}
+                                        className="rounded-pill shadow-sm"
                                     />
 
                                     <Form.Control.Feedback type="invalid">
@@ -135,12 +143,12 @@ const BookingForm = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
 
-                                <fieldset style={{ border: "2px" }}>
-                                    <legend>Logging period</legend>
-
-                                    <div className="row">
+                                <fieldset className="border p-3 rounded-3 mb-3">
+                                    <div className="row g-3">
                                         <div className="col-6">
-                                            <Form.Label className="hotel-color" htmlFor="checkInDate">Check-In date: </Form.Label>
+                                            <Form.Label className="fw-semibold hotel-color" htmlFor="checkInDate">
+                                                Check-In Date
+                                            </Form.Label>
 
                                             <FormControl
                                                 required
@@ -148,8 +156,8 @@ const BookingForm = () => {
                                                 id="checkInDate"
                                                 name="checkInDate"
                                                 value={booking.checkInDate}
-                                                placeholder="check-in date"
                                                 onChange={handleInputChange}
+                                                className="rounded shadow-sm"
                                             />
 
                                             <Form.Control.Feedback type="invalid">
@@ -158,7 +166,9 @@ const BookingForm = () => {
                                         </div>
 
                                         <div className="col-6">
-                                            <Form.Label className="hotel-color" htmlFor="checkOutDate">Check-Out date: </Form.Label>
+                                            <Form.Label className="fw-semibold hotel-color" htmlFor="checkOutDate">
+                                                Check-Out Date
+                                            </Form.Label>
 
                                             <FormControl
                                                 required
@@ -166,27 +176,27 @@ const BookingForm = () => {
                                                 id="checkOutDate"
                                                 name="checkOutDate"
                                                 value={booking.checkOutDate}
-                                                placeholder="check-out date"
                                                 onChange={handleInputChange}
+                                                className="rounded shadow-sm"
                                             />
 
                                             <Form.Control.Feedback type="invalid">
                                                 Please select a check-out date
                                             </Form.Control.Feedback>
                                         </div>
-
-                                        {
-                                            errorMsg && <p className="error-message text-danger">{errorMsg}</p>
-                                        }
                                     </div>
+
+                                    {
+                                        errorMsg && <p className="text-danger mt-2">{errorMsg}</p>
+                                    }
                                 </fieldset>
 
-                                <fieldset>
-                                    <legend>Number of Guest</legend>
-
-                                    <div className="row">
+                                <fieldset className="border p-3 rounded-3 mb-3">
+                                    <div className="row g-3">
                                         <div className="col-6">
-                                            <Form.Label className="hotel-color" htmlFor="numOfAdults">Adults: </Form.Label>
+                                            <Form.Label className="fw-semibold hotel-color" htmlFor="numOfAdults">
+                                                Adults
+                                            </Form.Label>
 
                                             <FormControl
                                                 required
@@ -197,15 +207,18 @@ const BookingForm = () => {
                                                 min={1}
                                                 placeholder="0"
                                                 onChange={handleInputChange}
+                                                className="rounded shadow-sm"
                                             />
 
                                             <Form.Control.Feedback type="invalid">
-                                                Please select atleast one adult.
+                                                Please select at least one adult.
                                             </Form.Control.Feedback>
                                         </div>
 
                                         <div className="col-6">
-                                            <Form.Label className="hotel-color" htmlFor="numOfChildren">Children: </Form.Label>
+                                            <Form.Label className="fw-semibold hotel-color" htmlFor="numOfChildren">
+                                                Children
+                                            </Form.Label>
 
                                             <FormControl
                                                 required
@@ -215,6 +228,7 @@ const BookingForm = () => {
                                                 value={booking.numOfChildren}
                                                 placeholder="0"
                                                 onChange={handleInputChange}
+                                                className="rounded shadow-sm"
                                             />
 
                                             <Form.Control.Feedback type="invalid">
@@ -224,8 +238,10 @@ const BookingForm = () => {
                                     </div>
                                 </fieldset>
 
-                                <div className="form-group mt-2 mb-2">
-                                    <button type="submit" className="btn btn-hotel">Continue</button>
+                                <div className="text-center mt-4">
+                                    <button type="submit" className="btn btn-primary px-5 py-2 rounded-pill shadow-sm fw-semibold">
+                                        Continue
+                                    </button>
                                 </div>
                             </Form>
                         </div>
@@ -234,18 +250,21 @@ const BookingForm = () => {
                     <div className="col-md-6">
                         {
                             isSubmited && (
-                                <BookingSummary
-                                    booking={booking}
-                                    payment={calculatePayment()}
-                                    isFormValid={isValidated}
-                                    onConfirm={handleFromSubmit}
-                                />
+                                <div>
+                                    <BookingSummary
+                                        booking={booking}
+                                        payment={calculatePayment()}
+                                        isFormValid={isValidated}
+                                        onConfirm={handleFromSubmit}
+                                    />
+                                </div>
                             )
                         }
                     </div>
                 </div>
             </div>
         </>
+
     )
 }
 

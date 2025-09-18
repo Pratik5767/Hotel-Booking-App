@@ -1,9 +1,9 @@
 import { parseISO } from "date-fns";
 import { useEffect, useState } from "react"
 import DateSlider from "../common/DateSlider";
+import moment from "moment";
 
 const BookingsTable = ({ bookingInfo, handleBookingCancelation }) => {
-
     const [filteredBookings, setFilteredBookings] = useState(bookingInfo);
 
     const filterBookings = (startDate, endDate) => {
@@ -58,8 +58,16 @@ const BookingsTable = ({ bookingInfo, handleBookingCancelation }) => {
                                 <td>{booking.id}</td>
                                 <td>{booking.room.id}</td>
                                 <td>{booking.room.roomType}</td>
-                                <td>{booking.checkInDate}</td>
-                                <td>{booking.checkOutDate}</td>
+                                <td>
+                                    {
+                                        moment(bookingInfo.checkInDate).subtract(1, "month").format("MMM Do, YYYY")
+                                    }
+                                </td>
+                                <td>
+                                    {
+                                        moment(bookingInfo.checkOutDate).subtract(1, "month").format("MMM Do, YYYY")
+                                    }
+                                </td>
                                 <td>{booking.guestFullName}</td>
                                 <td>{booking.guestEmail}</td>
                                 <td>{booking.numOfAdults}</td>

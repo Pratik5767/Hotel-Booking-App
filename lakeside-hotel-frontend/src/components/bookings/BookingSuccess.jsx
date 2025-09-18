@@ -8,25 +8,50 @@ const BookingSuccess = () => {
     const error = location.state?.error;
 
     return (
-        <div className="container">
+        <div className="container my-5">
             <Header title="Booking Success" />
 
-            <div className="mt-5">
-                {
-                    message ? (
-                        <div>
-                            <h3 className="text-success">Booking Success!</h3>
-                            <p className="text-success">{message}</p>
-                        </div>
-                    ) : (
-                        <div>
-                            <h3 className="text-danger">Error Booking room!</h3>
-                            <p className="text-danger">{error}</p>
-                        </div>
-                    )
-                }
+            <div className="d-flex justify-content-center mt-5">
+                <div className="card shadow-lg border-0 rounded-4 p-4 text-center" style={{ maxWidth: "500px", width: "100%" }}>
+                    {
+                        message ? (
+                            <>
+                                <div className="mb-3">
+                                    <span className="display-6 text-success">
+                                        <i className="bi bi-check-circle-fill"></i>
+                                    </span>
+                                </div>
+
+                                <h3 className="fw-bold text-success">Booking Successful!</h3>
+
+                                <p className="text-muted mt-2">{message}</p>
+
+                                <a href="/" className="btn btn-outline-success mt-3 rounded-pill px-4">
+                                    Go to Home
+                                </a>
+                            </>
+                        ) : (
+                            <>
+                                <div className="mb-3">
+                                    <span className="display-6 text-danger">
+                                        <i className="bi bi-x-circle-fill"></i>
+                                    </span>
+                                </div>
+
+                                <h3 className="fw-bold text-danger">Booking Failed</h3>
+
+                                <p className="text-muted mt-2">{error}</p>
+
+                                <a href="/" className="btn btn-outline-danger mt-3 rounded-pill px-4">
+                                    Try Again
+                                </a>
+                            </>
+                        )
+                    }
+                </div>
             </div>
         </div>
+
     )
 }
 

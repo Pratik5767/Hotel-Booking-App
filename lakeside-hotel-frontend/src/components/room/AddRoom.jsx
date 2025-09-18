@@ -56,28 +56,34 @@ const AddRoom = () => {
 
     return (
         <>
-            <section className="container, mt-5 mb-5">
+            <section className="container mt-5 mb-5">
                 <div className="row justify-content-center">
-                    <div className="col-md-8 col-lg-6">
-                        <h2 className="mt-5 mb-2">Add New Room</h2>
+                    <div className="col-md-8 col-lg-6 p-4 shadow rounded bg-light">
+                        <h2 className="text-center fw-bold mb-4">Add New Room</h2>
 
                         {
                             successMessage && (
-                                <div className="alert alert-success fade show">{successMessage}</div>
+                                <div className="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+                                    {successMessage}
+                                </div>
                             )
                         }
 
                         {
                             errorMessage && (
-                                <div className="alert alert-danger fade show">{errorMessage}</div>
+                                <div className="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+                                    {errorMessage}
+                                </div>
                             )
                         }
 
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} className="mt-3">
                             <div className="mb-3">
-                                <label htmlFor="roomType" className="form-label">Room Type</label>
-                                
-                                <div>
+                                <label htmlFor="roomType" className="form-label fw-semibold text-primary">
+                                    Room Type
+                                </label>
+
+                                <div className="shadow-sm p-2 rounded border">
                                     <RoomTypeSelector
                                         handleRoomInputChange={handleRoomInputChange}
                                         newRoom={newRoom}
@@ -86,7 +92,9 @@ const AddRoom = () => {
                             </div>
 
                             <div className="mb-3">
-                                <label htmlFor="roomPrice" className="form-label">Room Price</label>
+                                <label htmlFor="roomPrice" className="form-label fw-semibold text-primary">
+                                    Room Price
+                                </label>
 
                                 <input
                                     type="number"
@@ -94,48 +102,54 @@ const AddRoom = () => {
                                     name="roomPrice"
                                     value={newRoom.roomPrice}
                                     onChange={handleRoomInputChange}
-                                    className="form-control"
+                                    className="form-control shadow-sm"
+                                    placeholder="Enter room price"
                                     required
                                 />
                             </div>
 
                             <div className="mb-3">
-                                <label htmlFor="photo" className="form-label">Room Photo</label>
-                                
+                                <label htmlFor="photo" className="form-label fw-semibold text-primary">
+                                    Room Photo
+                                </label>
+
                                 <input
                                     type="file"
                                     id="photo"
                                     name="photo"
                                     onChange={handleImageChange}
-                                    className="form-control"
+                                    className="form-control shadow-sm"
                                 />
-                                
+
                                 {
                                     imagePreview && (
-                                        <img
-                                            src={imagePreview}
-                                            alt="preview-room-photo"
-                                            style={{ maxWidth: "400px", maxHeight: "400px" }}
-                                            className="mb-3"
-                                        />
+                                        <div className="text-center mt-3">
+                                            <img
+                                                src={imagePreview}
+                                                alt="preview-room-photo"
+                                                className="img-fluid rounded shadow"
+                                                style={{ maxWidth: "400px", maxHeight: "400px" }}
+                                            />
+                                        </div>
                                     )
                                 }
                             </div>
-                            
-                            <div className="d-grid gap-2 d-md-flex mt-2">
-                                <Link to={"/existing-rooms"} className="btn btn-outline-info">
-                                    Existing Room
+
+                            <div className="d-flex justify-content-between mt-4">
+                                <Link to={"/existing-rooms"} className="btn btn-outline-secondary shadow-sm">
+                                    Existing Rooms
                                 </Link>
-                                
-                                <div className="d-grid d-md-flex">
-                                    <button className="btn btn-outline-primary ml-5">Save Room</button>
-                                </div>
+
+                                <button className="btn btn-primary shadow-sm">
+                                    Save Room
+                                </button>
                             </div>
                         </form>
                     </div>
                 </div>
             </section>
         </>
+
     )
 }
 
